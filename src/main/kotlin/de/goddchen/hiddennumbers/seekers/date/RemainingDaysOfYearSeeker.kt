@@ -1,6 +1,7 @@
-package de.goddchen.hiddennumbers.seekers
+package de.goddchen.hiddennumbers.seekers.date
 
 import de.goddchen.hiddennumbers.RestController
+import de.goddchen.hiddennumbers.seekers.Seeker
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 import java.time.LocalDate

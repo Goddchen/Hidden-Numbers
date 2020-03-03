@@ -1,18 +1,19 @@
-package de.goddchen.hiddennumbers.seekers
+package de.goddchen.hiddennumbers.seekers.number
 
 import de.goddchen.hiddennumbers.RestController
+import de.goddchen.hiddennumbers.seekers.Seeker
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 
 @Component
 @Qualifier("LongSeeker")
-class RepDigitSeeker : Seeker<Long> {
+class PalindromeSeeker : Seeker<Long> {
     override fun findMagic(data: Long) =
         when {
             data.toString().length == 1 -> emptyList()
-            data.toString().all { it == data.toString()[0] } -> listOf(
+            data.toString().reversed() == data.toString() -> listOf(
                 RestController.Result(
-                    key = "repdigit"
+                    key = "palindrome"
                 )
             )
             else -> emptyList()
