@@ -11,12 +11,7 @@ class RemainingDaysOfYearSeeker(@Qualifier("LongSeeker") private val longSeekers
     Seeker<LocalDate> {
     override fun findMagic(data: LocalDate): List<RestController.Result> {
         val remainingDaysOfYear = (data.lengthOfYear() - data.dayOfYear).toLong()
-        return longSeekers
-            .flatMap { it.findMagic(remainingDaysOfYear) }
-            .map {
-                it.apply {
-                    args["remainingDaysOfYear"] = remainingDaysOfYear
-                }
-            }
+        return longSeekers.flatMap { it.findMagic(remainingDaysOfYear) }
+            .map { it.apply { args["remainingDaysOfYear"] = remainingDaysOfYear } }
     }
 }
