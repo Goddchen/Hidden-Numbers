@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+  hidden-numbers:
+    image: docker.pkg.github.com/goddchen/hidden-numbers/hidden-numbers:latest
+    network_mode: bridge
+    environment:
+      VIRTUAL_HOST: hidden-numbers.goddchen.de
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: hidden-numbers.goddchen.de
+      LETSENCRYPT_EMAIL: goddchen@gmail.com
+    expose:
+      - "8080"
+    restart: always
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    command: --debug --label-enable --cleanup --include-stopped --interval 60
