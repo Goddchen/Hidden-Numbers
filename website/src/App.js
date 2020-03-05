@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8080/date/today`)
+    fetch(`date/today`)
       .then(res => res.json())
       .then(data => {
         this.setState({
