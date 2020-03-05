@@ -8,7 +8,8 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: hidden-numbers
+        name: ${{ github.repository }}/hidden-numbers
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         dockerfile: docker/Dockerfile
+        registry: docker.pkg.github.com
