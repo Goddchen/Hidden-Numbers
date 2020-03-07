@@ -85,6 +85,7 @@ class App extends Component {
                 </ListItem>)
           }
         </List>
+        <p>Version: ##VERSION##</p>
       </div>
     );
   }
