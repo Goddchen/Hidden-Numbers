@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component
 class DigitSumMetaSeeker(@Qualifier("LongSeeker") private val longSeekers: List<Seeker<Long>>) :
     Seeker<Long> {
     override fun findMagic(data: Long): List<RestController.Result> {
+        if (data.toString().length == 1) return emptyList()
         val digitSum = data.toString().sumBy { char -> char.toString().toInt() }
         return longSeekers
             //.filter { it !is DigitSumMetaSeeker }
