@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import { List, ListItem, Card, CardContent, CardHeader, Box, Link } from '@material-ui/core';
 import Moment from 'react-moment'
 import 'moment/min/locales'
+import SVG from 'react-inlinesvg'
+import './localization'
+import { withTranslation } from 'react-i18next';
 
 Moment.globalLocale = window.navigator.userLanguage || window.navigator.language
 
@@ -33,8 +36,8 @@ class App extends Component {
     } else {
       apiPath = "date/today"
     }
-    fetch("http://localhost:8080/api/" + apiPath)
-      // fetch("/api/" + apiPath)
+    // fetch("http://localhost:8080/api/" + apiPath)
+    fetch("/api/" + apiPath)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -47,34 +50,42 @@ class App extends Component {
   }
 
   render() {
-    return (<div className="App">
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">
-            {this.title()}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <List>
-        {
-          this.state.magic
-            .filter(m => m.name !== "equal")
-            .filter(m => m.name !== "odd")
-            .map((m, index) =>
-              <ListItem key={index}>
-                <Box width={1}>
-                  <Card>
-                    <CardHeader title={this.magicName(m)} />
-                    <CardContent>
-                      <p>{this.magicDescription(m)}</p>
-                      {this.magicMeta(m)}
-                    </CardContent>
-                  </Card>
-                </Box>
-              </ListItem>)
-        }
-      </List>
-    </div>
+    return (
+      <div className="App">
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6">
+              {this.title()}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <a href="https://github.com/Goddchen/Hidden-Numbers/" target="_blank" rel="noopener noreferrer">
+          <SVG src='<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 250 250" fill="#ffffff" style="position: absolute; top: 0; right: 0"> \
+                      <path d="M0 0l115 115h15l12 27 108 108V0z" fill="#000000"/> \
+                      <path class="octo-arm" d="M128 109c-15-9-9-19-9-19 3-7 2-11 2-11-1-7 3-2 3-2 4 5 2 11 2 11-3 10 5 15 9 16" style="-webkit-transform-origin: 130px 106px; transform-origin: 130px 106px"/> \
+                      <path class="octo-body" d="M115 115s4 2 5 0l14-14c3-2 6-3 8-3-8-11-15-24 2-41 5-5 10-7 16-7 1-2 3-7 12-11 0 0 5 3 7 16 4 2 8 5 12 9s7 8 9 12c14 3 17 7 17 7-4 8-9 11-11 11 0 6-2 11-7 16-16 16-30 10-41 2 0 3-1 7-5 11l-12 11c-1 1 1 5 1 5z"/> \
+                    </svg>' />
+        </a>
+        <List>
+          {
+            this.state.magic
+              .filter(m => m.name !== "equal")
+              .filter(m => m.name !== "odd")
+              .map((m, index) =>
+                <ListItem key={index}>
+                  <Box width={1}>
+                    <Card>
+                      <CardHeader title={this.magicName(m)} />
+                      <CardContent>
+                        <p>{this.magicDescription(m)}</p>
+                        {this.magicMeta(m)}
+                      </CardContent>
+                    </Card>
+                  </Box>
+                </ListItem>)
+          }
+        </List>
+      </div>
     );
   }
 
@@ -95,11 +106,12 @@ class App extends Component {
   }
 
   magicName(magic) {
-    if (magic.name === "equal") return "Equal number"
-    if (magic.name === "odd") return "Odd number"
-    if (magic.name === "prime") return "Prime number"
-    if (magic.name === "unlucky-number") return "Unlucky number"
-    if (magic.name === "friday-13th") return "Friday 13th"
+    const { t } = this.props;
+    if (magic.name === "equal") return t("seeker.equal.name", magic.name)
+    if (magic.name === "odd") return t("seeker.odd.name", magic.name)
+    if (magic.name === "prime") return t("seeker.prime.name", magic.name)
+    if (magic.name === "unlucky-number") return t("seeker.unlucky-number.name", magic.name)
+    if (magic.name === "friday-13th") return t("seeker.friday-13th.name", magic.name)
     return magic.name
   }
 
@@ -108,24 +120,26 @@ class App extends Component {
   }
 
   magicMetaKey(key) {
-    if (key === "digitSum") return "Digit Sum"
-    if (key === "dayOfYear") return "Day of the year"
-    if (key === "remainingDaysOfYear") return "Remaining days of year"
-    if (key === "origin") return "Origin"
-    if (key === "reason") return "Reason"
+    const { t } = this.props;
+    if (key === "digitSum") return t("seeker.meta.digitsum", key)
+    if (key === "dayOfYear") return t("seeker.meta.dayofyear", key)
+    if (key === "remainingDaysOfYear") return t("seeker.meta.remainingdaysofyear", key)
+    if (key === "origin") return t("seeker.meta.origin", key)
+    if (key === "reason") return t("seeker.meta.reason", key)
     return key
   }
 
   magicDescription(magic) {
-    if (magic.name === "equal") return "This is an equal number"
-    if (magic.name === "odd") return "This is an odd number"
-    if (magic.name === "prime") return "This is a prime number"
-    if (magic.name === "unlucky-number") return "This is an unlucky number in parts of the world"
+    const { t } = this.props;
+    if (magic.name === "equal") return t("seeker.equal.description", magic.name)
+    if (magic.name === "odd") return t("seeker.odd.description", magic.name)
+    if (magic.name === "prime") return t("seeker.prime.description", magic.name)
+    if (magic.name === "unlucky-number") return t("seeker.unlucky-number.description", magic.name)
     if (magic.name === "friday-13th") return (
-      <span>Friday 13th. See <Link href="https://en.wikipedia.org/wiki/Friday_the_13th" target="_blank" rel="noopener noreferrer">Wikipedia</Link></span>
+      <span>{t("seeker.friday-13th.description", magic.name)} (<Link href="https://en.wikipedia.org/wiki/Friday_the_13th" target="_blank" rel="noopener noreferrer">Wikipedia</Link>)</span>
     )
     return magic.name
   }
 }
 
-export default App;
+export default withTranslation()(App);
