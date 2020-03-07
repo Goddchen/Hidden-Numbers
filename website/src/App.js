@@ -127,6 +127,7 @@ class App extends Component {
     if (key === "remainingDaysOfYear") return t("seeker.meta.remainingdaysofyear", key)
     if (key === "origin") return t("seeker.meta.origin", key)
     if (key === "reason") return t("seeker.meta.reason", key)
+    if (key === "dayOfMonth") return t("seeker.meta.dayofmonth", key)
     return key
   }
 

@@ -35,7 +35,8 @@ i18n
                             "dayofyear": "Day of the year",
                             "remainingdaysofyear": "Remaining days of year",
                             "origin": "Origin",
-                            "reason": "Reason"
+                            "reason": "Reason",
+                            "dayofmonth": "Day of month"
                         }
                     }
                 }
@@ -68,7 +69,8 @@ i18n
                             "dayofyear": "Tag des Jahres",
                             "remainingdaysofyear": "Verbleibende Tage im Jahr",
                             "origin": "Herkunft",
-                            "reason": "Grund"
+                            "reason": "Grund",
+                            "dayofmonth": "Tag des Monats"
                         }
                     }
                 }
