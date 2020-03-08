@@ -5,12 +5,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { List, ListItem, Card, CardContent, CardHeader, Box, Link } from '@material-ui/core';
 import Moment from 'react-moment'
+import moment from 'moment'
 import 'moment/min/locales'
 import SVG from 'react-inlinesvg'
 import './localization'
 import { withTranslation } from 'react-i18next';
 
 Moment.globalLocale = window.navigator.userLanguage || window.navigator.language
+moment.globalLocale = window.navigator.userLanguage || window.navigator.language
 
 class App extends Component {
 
@@ -34,7 +36,7 @@ class App extends Component {
     } else if (urlSearchParams.has("number")) {
       apiPath = "number/" + urlSearchParams.get("number")
     } else {
-      apiPath = "date/today"
+      apiPath = "date/" + moment().format("YYYY-MM-DD")
     }
     // fetch("http://localhost:8080/api/" + apiPath)
     fetch("/api/" + apiPath)
