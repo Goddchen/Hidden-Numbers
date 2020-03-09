@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @RestController
 @RequestMapping("/api/")
@@ -35,23 +36,25 @@ class RestController(
         @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate?,
         @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate?,
         @RequestParam("limit") limit: Int?
-    ): Map<LocalDate, Int> {
+    ): Map<*, *> {
         val fromDate = from ?: LocalDate.now().withDayOfYear(1).withDayOfMonth(1)
         val toDate = to ?: fromDate.plusYears(1).minusDays(1)
         var date = fromDate
-        val stats = mutableListOf<DateStat>()
+        val stats = mutableListOf<Stat<LocalDate>>()
         do {
             stats.add(
-                DateStat(
-                    date = date,
-                    results = localDateSeekers.flatMap { it.findMagic(date) }
-                ))
+                Stat(
+                    data = date,
+                    results = localDateSeekers.flatMap { it.findMagic(date) },
+                    url = "https://hidden-numbers.goddchen.de/date/${date.format(DateTimeFormatter.ISO_DATE)}"
+                )
+            )
             date = date.plusDays(1)
         } while (date != toDate)
         return stats
             .sortedByDescending { it.results.size }
             .take(limit ?: Int.MAX_VALUE)
-            .map { it.date to it.results.size }
+            .map { it.data to mapOf("number" to it.results.size, "url" to it.url) }
             .toMap()
     }
 
@@ -60,31 +63,31 @@ class RestController(
         @RequestParam("from") from: Long?,
         @RequestParam("to") to: Long?,
         @RequestParam("limit") limit: Int?
-    ): Map<Long, Int> {
+    ): Map<*, *> {
         val fromNumber = from ?: 1
         val toNumber = to ?: 1000
         var number = fromNumber
-        val stats = mutableListOf<NumberStat>()
+        val stats = mutableListOf<Stat<Long>>()
         do {
             stats.add(
-                NumberStat(
-                    number = number,
-                    results = longSeekers.flatMap { it.findMagic(number) }
-                ))
+                Stat(
+                    data = number,
+                    results = longSeekers.flatMap { it.findMagic(number) },
+                    url = "https://hidden-numbers.goddchen.de/number/$number"
+                )
+            )
             number += 1
         } while (number != toNumber)
         return stats
             .sortedByDescending { it.results.size }
             .take(limit ?: Int.MAX_VALUE)
-            .map { it.number to it.results.size }
+            .map { it.data to mapOf("number" to it.results.size, "url" to it.url) }
             .toMap()
     }
 
     data class Result(val name: String, val args: MutableMap<String, Any> = mutableMapOf())
 
-    data class DateStat(val date: LocalDate, val results: List<Result>)
-
-    data class NumberStat(val number: Long, val results: List<Result>)
+    data class Stat<T>(val data: T, val results: List<Result>, val url: String)
 
 }
 
