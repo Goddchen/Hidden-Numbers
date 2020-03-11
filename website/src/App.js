@@ -119,7 +119,9 @@ class App extends Component {
   }
 
   magicMeta(magic) {
-    return Object.keys(magic.args).map((key, index) => <p key={index}>{this.magicMetaKey(key)}: {magic.args[key]}</p>)
+    return Object.keys(magic.args)
+      .reverse()
+      .map((key, index) => <p key={index}>{this.magicMetaKey(key)}: {magic.args[key]}</p>)
   }
 
   magicMetaKey(key) {
