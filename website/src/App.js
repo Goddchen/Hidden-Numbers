@@ -110,12 +110,7 @@ class App extends Component {
 
   magicName(magic) {
     const { t } = this.props;
-    if (magic.name === "equal") return t("seeker.equal.name", magic.name)
-    if (magic.name === "odd") return t("seeker.odd.name", magic.name)
-    if (magic.name === "prime") return t("seeker.prime.name", magic.name)
-    if (magic.name === "unlucky-number") return t("seeker.unlucky-number.name", magic.name)
-    if (magic.name === "friday-13th") return t("seeker.friday-13th.name", magic.name)
-    return magic.name
+    return t(`seeker.${magic.name}.name`, magic.name)
   }
 
   magicMeta(magic) {
@@ -126,25 +121,13 @@ class App extends Component {
 
   magicMetaKey(key) {
     const { t } = this.props;
-    if (key === "digitSum") return t("seeker.meta.digitsum", key)
-    if (key === "dayOfYear") return t("seeker.meta.dayofyear", key)
-    if (key === "remainingDaysOfYear") return t("seeker.meta.remainingdaysofyear", key)
-    if (key === "origin") return t("seeker.meta.origin", key)
-    if (key === "reason") return t("seeker.meta.reason", key)
-    if (key === "dayOfMonth") return t("seeker.meta.dayofmonth", key)
-    return key
+    return t(`seeker.meta.${key.toLowerCase()}`, key)
   }
 
   magicDescription(magic) {
     const { t } = this.props;
-    if (magic.name === "equal") return t("seeker.equal.description", magic.name)
-    if (magic.name === "odd") return t("seeker.odd.description", magic.name)
-    if (magic.name === "prime") return t("seeker.prime.description", magic.name)
-    if (magic.name === "unlucky-number") return t("seeker.unlucky-number.description", magic.name)
-    if (magic.name === "friday-13th") return (
-      <span>{t("seeker.friday-13th.description", magic.name)} (<Link href="https://en.wikipedia.org/wiki/Friday_the_13th" target="_blank" rel="noopener noreferrer">Wikipedia</Link>)</span>
-    )
-    return magic.name
+    var url = t(`seeker.${magic.name}.url`, "")
+    return <span>{t(`seeker.${magic.name}.description`, magic.name)} {url ? <Link href={url} target="_blank" rel="noopener noreferrer">More info...</Link> : ""}</span>
   }
 }
 
