@@ -1,0 +1,13 @@
+type KeyValuePair {
+    key: String!,
+    value: String!
+}
+
+type Result {
+    name: String!,
+    args: [KeyValuePair!]
+}
+
+type Query {
+    today: [Result!]
+}

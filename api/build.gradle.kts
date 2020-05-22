@@ -18,6 +18,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:7.0.1")
+    implementation("com.graphql-java-kickstart:graphql-java-tools:6.0.2")
+    runtimeOnly("com.graphql-java-kickstart:altair-spring-boot-starter:7.0.1")
+    runtimeOnly("com.graphql-java-kickstart:graphiql-spring-boot-starter:7.0.1")
+    runtimeOnly("com.graphql-java-kickstart:voyager-spring-boot-starter:7.0.1")
+    runtimeOnly("com.graphql-java-kickstart:playground-spring-boot-starter:7.0.1")
 }
 
 tasks {
