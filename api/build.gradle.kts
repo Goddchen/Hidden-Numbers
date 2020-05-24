@@ -20,6 +20,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:7.0.1")
     implementation("com.graphql-java-kickstart:graphql-java-tools:6.0.2")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.4")
     runtimeOnly("com.graphql-java-kickstart:altair-spring-boot-starter:7.0.1")
     runtimeOnly("com.graphql-java-kickstart:graphiql-spring-boot-starter:7.0.1")
     runtimeOnly("com.graphql-java-kickstart:voyager-spring-boot-starter:7.0.1")

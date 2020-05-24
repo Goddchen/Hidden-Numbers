@@ -1,3 +1,11 @@
+type Query {
+    today: [Result!]
+}
+
+type Subscription {
+    today: [Result!]
+}
+
 type KeyValuePair {
     key: String!,
     value: String!
@@ -6,8 +14,4 @@ type KeyValuePair {
 type Result {
     name: String!,
     args: [KeyValuePair!]
-}
-
-type Query {
-    today: [Result!]
 }
