@@ -1,10 +1,10 @@
-FROM node:10 as build-website
+FROM node:10 AS build-website
 WORKDIR /src/website/
 COPY website/ .
 RUN npm install
 RUN npm run-script build
 
-FROM gradle:6.2.2-jdk as build-api
+FROM gradle:6.2.2-jdk AS build-api
 WORKDIR /src/api/
 COPY api/ .
 COPY --from=build-website /src/website/build/ /src/api/src/main/resources/static/
