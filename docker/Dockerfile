@@ -1,4 +1,4 @@
-FROM node:9 as build-website
+FROM node:10 as build-website
 WORKDIR /src/website/
 COPY website/ .
 RUN npm install
