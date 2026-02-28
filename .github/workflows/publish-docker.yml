@@ -7,14 +7,14 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@0.1.1
+        uses: jacobtomlinson/gha-find-replace@3.0.5
         with:
           find: "##VERSION##"
           replace: "0.1.${{ github.run_number}}"
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: goddchen/hidden-numbers
           username: ${{ secrets.DOCKER_USER }}
