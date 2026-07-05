@@ -4,7 +4,7 @@ COPY website/ .
 RUN npm install
 RUN npm run-script build
 
-FROM eclipse-temurin:21-jdk AS build-api
+FROM eclipse-temurin:17-jdk AS build-api
 WORKDIR /src/api/
 COPY api/ .
 COPY --from=build-website /src/website/build/ /src/api/src/main/resources/static/
