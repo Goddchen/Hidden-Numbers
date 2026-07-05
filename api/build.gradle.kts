@@ -1,19 +1,22 @@
 plugins {
-    kotlin("jvm") version "1.3.61"
-    kotlin("plugin.spring") version "1.3.61"
-    id("org.springframework.boot") version "2.2.5.RELEASE"
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
+    kotlin("jvm") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25"
+    id("org.springframework.boot") version "3.3.12"
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "de.goddchen"
 version = "1.0-SNAPSHOT"
+
+kotlin {
+    jvmToolchain(17)
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -22,9 +25,9 @@ dependencies {
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
 }
